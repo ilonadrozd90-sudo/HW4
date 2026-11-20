@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox, QTableWidget, QTableWidgetItem
 import sys
 import os
+import subprocess
 from About import About
 from file_select import FileSelect
 
@@ -41,6 +42,7 @@ class Grades(QWidget):
 
         self.update = QPushButton("Update file", self)
         self.update.setGeometry(500, 470, 100, 30)
+        self.update.clicked.connect(self.update_file)
 
         self.about = QPushButton("About", self)
         self.about.clicked.connect(self.show_about)
@@ -94,7 +96,23 @@ class Grades(QWidget):
 
         self.update_table()
 
-        
+    def update_file(self):
+
+        with open(self.selected_file, "r") as f:
+            header = f.readline()
+
+        with open(self.selected_file, "w") as f:
+            if header:
+                f.write(header if header.endswith("\n") else header + "\n")
+            for i in range(len(self.student_ids)):
+                f.write(f"{self.student_ids[i]},{self.corrected_grades[i]}\n")
+
+        if sys.platform == "win32":
+            os.startfile(self.selected_file)
+        elif sys.platform == "darwin":
+            subprocess.run(["open", self.selected_file])
+        else:
+            subprocess.run(["xdg-open", self.selected_file])
 
 
 if __name__ == "__main__":
