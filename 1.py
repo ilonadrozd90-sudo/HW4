@@ -37,6 +37,7 @@ class Grades(QWidget):
         self.bonus_input.setRange(0, 100)
         self.bonus_input.setValue(0)
         self.bonus_input.setGeometry(110, 470, 100, 30)
+        self.bonus_input.lineEdit().returnPressed.connect(self.add_bonus)
 
         self.update = QPushButton("Update file", self)
         self.update.setGeometry(500, 470, 100, 30)
@@ -82,7 +83,18 @@ class Grades(QWidget):
             self.table.setItem(row, 1, QTableWidgetItem(str(self.original_grades[row])))
             self.table.setItem(row, 2, QTableWidgetItem(str(self.corrected_grades[row])))
 
+    def add_bonus(self):
+        bonus = self.bonus_input.value()
 
+        for i in range(len(self.original_grades)):
+            new_grade = self.original_grades[i] + bonus
+            if new_grade > 100:
+                new_grade = 100
+            self.corrected_grades[i] = new_grade
+
+        self.update_table()
+
+        
 
 
 if __name__ == "__main__":

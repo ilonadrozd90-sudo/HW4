@@ -21,5 +21,5 @@ class FileSelect(QWidget):
         file_name = self.file_input.text().strip()
         if file_name:
             self.file.selected_file = file_name
-            self.file.read_grades_from_file()
+            self.file.read()
             self.close()
