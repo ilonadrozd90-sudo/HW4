@@ -30,6 +30,12 @@ class Grades(QWidget):
         self.bonus_input.setValue(0)
         self.bonus_input.setGeometry(110, 470, 100, 30)
 
+        self.update = QPushButton("Update file", self)
+        self.update.setGeometry(500, 470, 100, 30)
+
+        self.about = QPushButton("About", self)
+        self.about.setGeometry(20, 525, 150, 30)
+
 
 
 
