@@ -15,7 +15,7 @@ class About(QWidget):
         self.email = QLabel("Email: IlonaDrozd@s.afeka.co.il", self)
         self.email.setGeometry(180,50,300,30)
 
-        github_url = "https://github.com/ilonadrozd90-sudo/"
+        github_url = "https://github.com/ilonadrozd90-sudo/HW4"
         self.github = QLabel(f'<a href="{github_url}">GitHub Repository</a>', self)
         self.github.setGeometry(180,80,600,30)
         self.github.setOpenExternalLinks(True)

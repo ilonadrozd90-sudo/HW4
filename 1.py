@@ -10,6 +10,11 @@ class Grades(QWidget):
         self.setWindowTitle("Grades Correction System")
         self.setGeometry(200,200,650,600)
 
+        self.student_ids = []
+        self.original_grades = []
+        self.corrected_grades = []
+        self.selected_file = ''
+
         self.face()
 
     def face(self):
