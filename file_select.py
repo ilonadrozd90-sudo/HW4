@@ -14,7 +14,7 @@ class FileSelect(QWidget):
         self.file_input.setGeometry(20, 50, 310, 30)
 
         confirm_btn = QPushButton("Open the file", self)
-        confirm_btn.setGeometry(130, 100, 100, 30)
+        confirm_btn.setGeometry(130, 100, 120, 30)
         confirm_btn.clicked.connect(self.confirm_selection)
 
     def confirm_selection(self):

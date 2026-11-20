@@ -41,7 +41,7 @@ class Grades(QWidget):
         self.bonus_input.lineEdit().returnPressed.connect(self.add_bonus)
 
         self.update = QPushButton("Update file", self)
-        self.update.setGeometry(500, 470, 100, 30)
+        self.update.setGeometry(500, 470, 110, 30)
         self.update.clicked.connect(self.update_file)
 
         self.about = QPushButton("About", self)
