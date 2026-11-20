@@ -1,7 +1,8 @@
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox, QTableWidget
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox, QTableWidget, QTableWidgetItem
 import sys
 import os
 from About import About
+from file_select import FileSelect
 
 class Grades(QWidget):
     def __init__(self):
@@ -20,6 +21,7 @@ class Grades(QWidget):
     def face(self):
         self.load = QPushButton("Load your file:", self)
         self.load.setGeometry(20, 20, 160, 30)
+        self.load.clicked.connect(self.load_file)
 
         self.table = QTableWidget(50, 3, self)
         self.table.setGeometry(20, 60, 600, 400)
@@ -47,6 +49,40 @@ class Grades(QWidget):
     def show_about(self):
         self.about_window = About()
         self.about_window.show()
+
+
+    def load_file(self):
+        self.file_window = FileSelect(self)
+        self.file_window.show()
+
+    def read(self):
+        self.student_ids = []
+        self.original_grades = []
+        self.corrected_grades = []
+
+        with open(self.selected_file, "r") as f:
+            lines = f.readlines()
+
+        for line in lines[1:]:
+            parts = line.strip().split(",")
+            if len(parts) >= 2:
+                student_id = parts[0].strip()
+                grade = int(parts[1].strip())
+
+                self.student_ids.append(student_id)
+                self.original_grades.append(grade)
+                self.corrected_grades.append(grade)
+
+        self.update_table()
+
+    def update_table(self):
+        self.table.clearContents()
+        for row in range(len(self.student_ids)):
+            self.table.setItem(row, 0, QTableWidgetItem(str(self.student_ids[row])))
+            self.table.setItem(row, 1, QTableWidgetItem(str(self.original_grades[row])))
+            self.table.setItem(row, 2, QTableWidgetItem(str(self.corrected_grades[row])))
+
+
 
 
 if __name__ == "__main__":
