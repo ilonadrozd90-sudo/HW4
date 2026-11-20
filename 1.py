@@ -1,4 +1,4 @@
-from PySide6.QWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox, QTableWidget
 import sys
 import os
 
@@ -7,7 +7,14 @@ class Grades(QWidget):
         super().__init__()
         self.setObjectName("mainWindow")
         self.setWindowTitle("Grades Correction System")
-        self.setFixedSize(500, 500)
+        self.setGeometry(200,200,500,400)
+
+        self.face()
+
+    def face(self):
+        self.load = QPushButton("Load your file:", self)
+        self.load.setGeometry(20, 20, 160, 38)
+
 
 
 if __name__ == "__main__":
