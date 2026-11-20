@@ -7,13 +7,22 @@ class Grades(QWidget):
         super().__init__()
         self.setObjectName("mainWindow")
         self.setWindowTitle("Grades Correction System")
-        self.setGeometry(200,200,500,400)
+        self.setGeometry(200,200,650,600)
 
         self.face()
 
     def face(self):
         self.load = QPushButton("Load your file:", self)
-        self.load.setGeometry(20, 20, 160, 38)
+        self.load.setGeometry(20, 20, 160, 30)
+
+        self.table = QTableWidget(50, 3, self)
+        self.table.setGeometry(20, 60, 600, 400)
+        self.table.setHorizontalHeaderLabels(["ID", "Original Grades", "Corrected Grades"])
+        self.table.setColumnWidth(0, 200)
+        self.table.setColumnWidth(1, 200)
+        self.table.setColumnWidth(2, 200)
+
+
 
 
 
