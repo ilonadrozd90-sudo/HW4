@@ -1,6 +1,7 @@
 from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox, QTableWidget
 import sys
 import os
+from About import About
 
 class Grades(QWidget):
     def __init__(self):
@@ -34,10 +35,13 @@ class Grades(QWidget):
         self.update.setGeometry(500, 470, 100, 30)
 
         self.about = QPushButton("About", self)
+        self.about.clicked.connect(self.show_about)
         self.about.setGeometry(20, 525, 150, 30)
 
 
-
+    def show_about(self):
+        self.about_window = About()
+        self.about_window.show()
 
 
 if __name__ == "__main__":
