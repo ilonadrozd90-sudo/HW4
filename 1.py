@@ -22,6 +22,14 @@ class Grades(QWidget):
         self.table.setColumnWidth(1, 200)
         self.table.setColumnWidth(2, 200)
 
+        bonus_label = QLabel("Enter bonus:", self)
+        bonus_label.setGeometry(20, 470, 100, 30)
+
+        self.bonus_input = QSpinBox(self)
+        self.bonus_input.setRange(0, 100)
+        self.bonus_input.setValue(0)
+        self.bonus_input.setGeometry(110, 470, 100, 30)
+
 
 
 
