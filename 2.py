@@ -8,7 +8,7 @@ class Icecream_App(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Icecream truck")
-        self.setGeometry(200,200,500,400)
+        self.setGeometry(200,200,500,200)
 
         self.selected_file = ''
     
@@ -19,12 +19,25 @@ class Icecream_App(QWidget):
         self.load = QPushButton("Load your file:", self)
         self.load.setGeometry(20, 20, 160, 30)
 
-
         self.about = QPushButton("About", self)
-        self.about.setGeometry(250, 20, 160, 30)
+        self.about.setGeometry(270, 20, 160, 30)
 
         self.graph = QPushButton("Show graph", self)
-        self.graph.setGeometry(50, 100, 160, 30)
+        self.graph.setGeometry(150, 80, 160, 35)
+        self.graph.clicked.connect(self.plot_temp_graph)
+
+    def plot_temp_graph(self):
+
+        x = [10, 15, 20, 25, 30]
+        y = [100, 180, 250, 340, 420]
+
+        plt.figure()
+        plt.plot(x, y, marker="o", color="#2980b9")
+        plt.title("Temporary graph")
+        plt.xlabel("X Axis")
+        plt.ylabel("Y Axis")
+        plt.grid(True)
+        plt.show()    
 
 
 
