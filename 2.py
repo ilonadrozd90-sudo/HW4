@@ -1,15 +1,18 @@
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel, QSpinBox, QTableWidget, QTableWidgetItem
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel
 import sys
 import os
 from About import About
 import matplotlib.pyplot as plt
+from file_select import FileSelect
 
 class Icecream_App(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Icecream truck")
-        self.setGeometry(200,200,500,200)
+        self.setGeometry(200,200,470,170)
 
+        self.temperatures = []
+        self.revenues = []
         self.selected_file = ''
     
         self.interface()
@@ -18,13 +21,38 @@ class Icecream_App(QWidget):
 
         self.load = QPushButton("Load your file:", self)
         self.load.setGeometry(20, 20, 160, 30)
+        self.load.clicked.connect(self.load_file)
 
         self.about = QPushButton("About", self)
         self.about.setGeometry(270, 20, 160, 30)
+        self.about.clicked.connect(self.show_about)
 
         self.graph = QPushButton("Show graph", self)
         self.graph.setGeometry(150, 80, 160, 35)
         self.graph.clicked.connect(self.plot_temp_graph)
+
+    def show_about(self):
+        self.about_window = About()
+        self.about_window.show()
+
+    def load_file(self):
+            self.file_window = FileSelect(self)
+            self.file_window.show()
+
+    def read(self):
+        self.temperatures = []
+        self.revenues = []
+    
+        with open(self.selected_file, "r") as f:
+                lines = f.readlines()
+    
+        for line in lines[1:]:
+            parts = line.strip().split(",")
+            if len(parts) >= 2:
+                self.temperatures.append(float(parts[0].strip()))
+                self.revenues.append(float(parts[1].strip()))
+
+            self.plot_temp_graph()
 
     def plot_temp_graph(self):
 

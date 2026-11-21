@@ -5,7 +5,7 @@ class FileSelect(QWidget):
         super().__init__()
         self.file = file
         self.setWindowTitle("Select file:")
-        self.setGeometry(200,200, 350, 150)
+        self.setGeometry(400,300, 350, 150)
 
         label = QLabel("Enter file name:", self)
         label.setGeometry(20, 20, 310, 30)
