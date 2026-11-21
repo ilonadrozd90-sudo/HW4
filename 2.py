@@ -4,6 +4,7 @@ import os
 from About import About
 import matplotlib.pyplot as plt
 from file_select import FileSelect
+import numpy as np
 
 class Icecream_App(QWidget):
     def __init__(self):
@@ -60,6 +61,12 @@ class Icecream_App(QWidget):
 
         if self.temperatures and self.revenues:
             plt.scatter(self.temperatures, self.revenues, s=1, color="#2980b9")
+
+            m, b = np.polyfit(self.temperatures, self.revenues, 1)
+            x_vals = np.array(self.temperatures)
+            plt.plot(x_vals, m * x_vals + b, color="#e74c3c", linewidth=1.5, label=f"y = {m:.2f}x + {b:.2f}")
+            plt.legend()
+
             plt.title("Revenue vs temperature")
             plt.xlabel("Temperature[°C]")
             plt.ylabel("Revenue[$]")
