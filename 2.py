@@ -1,4 +1,4 @@
-from PySide6.QtWidgets import QApplication, QWidget, QPushButton, QLabel
+from PySide6.QtWidgets import QApplication, QWidget, QPushButton
 import sys
 import os
 from About import About
@@ -52,20 +52,29 @@ class Icecream_App(QWidget):
                 self.temperatures.append(float(parts[0].strip()))
                 self.revenues.append(float(parts[1].strip()))
 
-            self.plot_temp_graph()
+        self.plot_temp_graph()
 
     def plot_temp_graph(self):
+        plt.figure("Revenue vs temperature")
+        plt.clf()
 
-        x = [10, 15, 20, 25, 30]
-        y = [100, 180, 250, 340, 420]
+        if self.temperatures and self.revenues:
+            plt.scatter(self.temperatures, self.revenues, s=1, color="#2980b9")
+            plt.title("Revenue vs temperature")
+            plt.xlabel("Temperature[°C]")
+            plt.ylabel("Revenue[$]")
+        else:
+            plt.plot([10, 15, 20, 25, 30], [100, 180, 250, 340, 420], marker="o", color="#2980b9")
+            plt.title("Temporary Graph")
+            plt.xlabel("X Axis")
+            plt.ylabel("Y Axis")
 
-        plt.figure()
-        plt.plot(x, y, marker="o", color="#2980b9")
-        plt.title("Temporary graph")
-        plt.xlabel("X Axis")
-        plt.ylabel("Y Axis")
+        ax = plt.gca()
+        ax.spines["top"].set_visible(False)
+        ax.spines["right"].set_visible(False)
+
         plt.grid(True)
-        plt.show()    
+        plt.show(block=False)
 
 
 

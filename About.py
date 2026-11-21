@@ -6,7 +6,7 @@ class About(QWidget):
         super().__init__()
 
         self.setWindowTitle("About")
-        self.setGeometry(200,200,600,150)
+        self.setGeometry(400,400,600,150)
         self.setStyleSheet('font-family: "Lucida Sans Unicode"; font-size: 18px;')
 
         self.name = QLabel("Name: Ilona Drozd", self)
